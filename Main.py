@@ -1,5 +1,7 @@
 from Window import Window
+from Desk import Desk
 from Talk import Talk
+from ToDo import ToDo
 class Main:
       def __init__(s):
             #Dane:
@@ -7,6 +9,9 @@ class Main:
             master=win.getMaster()
             desk=Desk(master)
             C=desk.getC()
+            todo=ToDo()
+            
+            talk=Talk(master,todo)
             #testowanie
             #testowanie
             win.loop()

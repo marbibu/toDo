@@ -48,3 +48,7 @@ class Note(Sender):
       def setXY(s,x,y):#Ustawia polozenie notatki
             s.__x,s.__y=x,y
             s.sendSignal()
+      def setH(s,h):#Ustawia wysokosc kontrolki
+            s.__h=h
+      def getH(s):#Zwraca wysokosc kontrolki
+            return s.__h

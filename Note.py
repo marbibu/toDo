@@ -2,10 +2,11 @@ from Sender import Sender
 from NoteManager import NoteManager
 class Note(Sender,NoteManager):
       __marginY=10
-      def __init__(s,master,text,x,y):
+      def __init__(s,todo,master,text,x,y):
             #Dane:
             Sender.__init__(s)
             s.__noteM=NoteManager()
+            s.__todo=todo
             s.__master=master
             s.__previous=None
             s.__next=None
@@ -35,6 +36,18 @@ class Note(Sender,NoteManager):
             return s.__selected
       def getVisible(s):#Zwraca parametr widocznosci
             return s.__visible
+      def getMaster(s):#Zwraca mastera
+            return s.__master
+      def getManager(s):#Zwraca managera
+            return s.__noteM
+      def getCurrentChild(s):#Zwraca biezacego potomka
+            return s.__noteM.getCurrentNote()
+      def showChildren(s):#Wyswietla potomstwo
+            s.__noteM.showAllNotes()
+      def hideChildren(s):#Ukrywa potomstwo
+            s.__noteM.hideAllNotes()
+      def getToDo(s):#Zwraca todo
+            return s.__todo
       
       def setPrevious(s,note):#Ustawia poprzednika
             s.__previous=note

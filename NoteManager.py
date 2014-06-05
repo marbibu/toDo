@@ -11,6 +11,7 @@ class NoteManager:
             note.setY(s.__Y)
             s.selectNote(note)
             s.__n+=1
+            s.__Y+=s.__current.getH()+20
       def selectNote(s,note):#Zaznacza notatke
             if s.__current==None:
                   pass
@@ -19,8 +20,7 @@ class NoteManager:
             s.__current=note
             s.__current.select()
             s.__n+=1
-            s.__Y+=s.__current.getH()+10
-            print s.__current.getSelected()
+            
       def delNote(s):#Usuwa biezaca notatke
             ind=s.__notes.index(s.__current)
             if ind==s.__n:
@@ -39,3 +39,9 @@ class NoteManager:
                   return 1
             else:
                   return 0
+      def hideAllNotes(s):#Ukrywa wszystkich potomkow
+            for i in s.__notes:
+                  i.hide()
+      def showAllNotes(s):#Wyswietla wszystkich potomkow
+            for i in s.__notes:
+                  i.show()

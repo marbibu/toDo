@@ -11,22 +11,46 @@ class Main:
             #Dane:
             win=Window("todo",600,600,0,0)
             master=win.getMaster()
-            topB=TopBar(master)
+            todo=ToDo()
+            
+            topB=TopBar(master,todo)
             desk=Desk(master)
             C=desk.getC()
-            todo=ToDo()
-            optionB=OptionBar(master)
-            talk=Talk(master,todo)
+            
+            optionB=OptionBar(master,desk,todo)
+            talk=Talk(master,todo)  
             #testowanie
             
-            noteF=NoteFactory()
-            noteF.newNote(None,50,50)
-            note=noteF.getNote()
-            note.setText("Jakis tam tekst")
-            noteG=NoteGUI(C,note)
             
             
-            note.getH()
+            #nF=NoteFactory()
+            #nF.firstNote()
+            #note=nF.getNote()
+            #nG=NoteGUI(C,note)
+            #note.deselect()
+            #print note.getSelected()
+            #current=note
+            
+            #nF.newNote(None,50,current.getY(0))
+            #note2=nF.getNote()
+            #NoteGUI(C,note2)
+            #current=note
+            
+            #note.hide()
+            
+            #noteF.newNote(None,50,50)
+            #note=noteF.getNote()
+            #note.setText("Jakis tam tekst,Jakis tam tekst,Jakis tam tekst,Jakis tam tekst,,Jakis tam tekst,Jakis tam tekst,Jakis tam tekst,Jakis tam tekst,Jakis tam tekst")
+            #noteG=NoteGUI(C,note)
+            
+            
+            #note.getH()
             #testowanie
             win.loop()
 Main()
+#swift
+
+#ADD dodaje notatke do tytulowej notatki
+#INS dodaje notatke do biezacej notatki
+#INS nie bedzie potrzebny...
+#

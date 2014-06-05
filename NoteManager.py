@@ -1,46 +1,41 @@
 class NoteManager:
+      #mozna tylko dodawac
       def __init__(s):
             #Dane:
-            s.__first=None
+            s.__notes=[]
             s.__current=None
-      def addNote(s,note):#Dodaje
-            #s.__note.append(note)
-            if s.__first==None:
-                  s.__first=note
-            else:
-                  pass
-            s.__current.setNext(note)
+            s.__n=0
+            s.__Y=10
+      def addNote(s,note):#Dodaje notatke
+            s.__notes.append(note)
+            note.setY(s.__Y)
             s.selectNote(note)
-      def selectNote(s,note):#Zaznacza
-            if s.__note==None:
+            s.__n+=1
+      def selectNote(s,note):#Zaznacza notatke
+            if s.__current==None:
                   pass
             else:
-                  s.__note.deselect()
+                  s.__current.deselect()
             s.__current=note
             s.__current.select()
-      def delNote(s):#Usuwa
-            prev=s.__current.getPrevious()
-            nex=s.__current.getNext()
-            s.__current.destroy()
-            if s.__first==s.__current:
-                  if nex==None:
-                        s.__first=None
-                  else:
-                        s.__first=nex
-            else:
-                  pass
-            if prev==None:
-                  if nex==None:
+            s.__n+=1
+            s.__Y+=s.__current.getH()+10
+            print s.__current.getSelected()
+      def delNote(s):#Usuwa biezaca notatke
+            ind=s.__notes.index(s.__current)
+            if ind==s.__n:
+                  if ind==0:
                         s.__current=None
                   else:
-                        nex.setPrevious(None)
-                        s.selectNode(nex)
+                        s.selectNote(s.__notes[ind-1])
             else:
-                  if nex==None:
-                        prev.setNext(None)
-                        s.selectNode(prev)
-                  else:
-                        prev.setNext(nex)
-                        s.select(nex)
+                  s.selectNote(s.__notes[ind+1])
+            s.__notes.remove(s.__current)
+            s.__n-=1
       def getCurrentNote(s):#Zwraca biezaca notatke
             return s.__current
+      def hasNotes(s):#Sprawdza czy liste notatek nie jest pusta
+            if s.__n>0:
+                  return 1
+            else:
+                  return 0

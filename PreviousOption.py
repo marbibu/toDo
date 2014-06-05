@@ -1,7 +1,8 @@
 class PreviousOption:
-      def __init__(s,C):
+      def __init__(s,C,todo):
             #Dane:
             s.__C=C
+            s.__todo=todo
             #Definicje:
             s.__draw()
             s.__bind()

@@ -1,5 +1,6 @@
 from Sender import Sender
 from NoteManager import NoteManager
+from copy import deepcopy
 class Note(Sender,NoteManager):
       __marginY=10
       def __init__(s,todo,master,text,x,y):
@@ -8,18 +9,12 @@ class Note(Sender,NoteManager):
             s.__noteM=NoteManager()
             s.__todo=todo
             s.__master=master
-            s.__previous=None
-            s.__next=None
             s.__text=text
             s.__x,s.__y=x,y
             s.__h=20
             s.__selected=0
             s.__visible=1
             s.__exist=1
-      def getPrevious(s):#Zwraca id poprzednika
-            return s.__previous
-      def getNext(s):#Zwraca id nastepnika
-            return s.__next
       def getMaster(s):#Zwraca nadrzednego
             return s.__master
       def getText(s):#Zwraca tekst
@@ -48,15 +43,6 @@ class Note(Sender,NoteManager):
             s.__noteM.hideAllNotes()
       def getToDo(s):#Zwraca todo
             return s.__todo
-      
-      def setPrevious(s,note):#Ustawia poprzednika
-            s.__previous=note
-            s.sendSignal()
-      def setNext(s,note):#Ustawia nastepnika
-            s.__next=note
-            s.__next.setPrevious(s)
-            s.sendSignal()
-      
       def setText(s,text):#Ustawia tekst
             s.__text=text
             s.sendSignal()
@@ -71,8 +57,6 @@ class Note(Sender,NoteManager):
       def setY(s,y):#Ustawia polozenie notatki
             s.__y=y
             s.sendSignal()
-      def setH(s,h):#Ustawia wysokosc kontrolki
-            s.__h=h
             
       def select(s):#Zaznacza notatke
             s.__selected=1
@@ -90,11 +74,21 @@ class Note(Sender,NoteManager):
       
       def addNote(s,note):#Dodaje notatke
             s.__noteM.addNote(note)
-      
-      def hasChild(s):#Zprawdza czy jest potomstwo
+      def delNote(s):#Usuwa notatke
+            s.__noteM.delNote()
+      def hasChild(s):#Sprawdza czy jest potomstwo
             return s.__noteM.hasNotes()
-            #if s.__noteM.getFirst()==None:
-                  #return 0
-            #else:
-                  #return 1
-      #narazie mozna tylko dodawac do notatki
+      def getString(s,t):#Zwraca string z zapisem
+            s.__todo.add2saveString("%s%s\n"%(t*"\t",s.__text))
+            notes=s.__noteM.getNotes()
+            if len(notes)==0:
+                  pass
+            else:
+                  s.__todo.add2saveString("%s<children>\n"%(t*"\t"))
+                  t+=1
+                  for i in notes:
+                        i.getString(t)
+                  s.__todo.add2saveString("%s</children>\n"%((t-1)*"\t"))
+      def moveUp(s):#Przemieszcza notatke do gory o jej wysokosc
+            s.setY(s.__y-40)
+                  

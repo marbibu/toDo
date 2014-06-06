@@ -9,6 +9,5 @@ class NoteFactory:
             s.__note=Note(todo,None,"ToDo",50,20)
       def newNoteWithText(s,todo,master,text,x,y):#Tworzy notatke z podanym tekstem
             s.__note=Note(todo,master,text,x,y)
-      #def defaultNote(s):#Tworzy domyslna notatke
       def getNote(s):#Zwraca biezaca notatke
             return s.__note

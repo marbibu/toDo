@@ -1,9 +1,4 @@
 todo
 <children>
-nowe
-hej
-<children>
-co tam?
-</children>
-ho
+	jakiś tekst
 </children>

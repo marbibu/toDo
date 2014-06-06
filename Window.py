@@ -12,6 +12,8 @@ class Window:
             s.__master=Tk()
             s.__master.title(s.__title)
             s.__master.geometry("%sx%s+%s+%s"%(s.__w,s.__h,s.__x,s.__y))
+            s.__master.minsize(600, 600)
+            s.__master.maxsize(600,0)
       def getTitle(s):#Zwraca tytul
             return s.__title
       def setTitle(s,title):#Ustawia tytul

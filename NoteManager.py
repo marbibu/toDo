@@ -11,7 +11,7 @@ class NoteManager:
             note.setY(s.__Y)
             s.selectNote(note)
             s.__n+=1
-            s.__Y+=s.__current.getH()+20
+            s.__Y+=40
       def selectNote(s,note):#Zaznacza notatke
             if s.__current==None:
                   pass
@@ -19,19 +19,44 @@ class NoteManager:
                   s.__current.deselect()
             s.__current=note
             s.__current.select()
-            s.__n+=1
-            
+      def selectNext(s):#Zaznacza nastepna notatke
+            if s.__current==None:
+                  pass
+            else:
+                  ind=s.__notes.index(s.__current)
+                  if ind<s.__n-1:
+                        s.selectNote(s.__notes[ind+1])
+                  else:
+                        pass
+      def selectPrevious(s):#Zaznacza poprzednia notatke
+            if s.__current==None:
+                  pass
+            else:
+                  ind=s.__notes.index(s.__current)
+                  if ind>0:
+                        s.selectNote(s.__notes[ind-1])
+                  else:
+                        pass
       def delNote(s):#Usuwa biezaca notatke
             ind=s.__notes.index(s.__current)
-            if ind==s.__n:
+            if ind==s.__n-1:
                   if ind==0:
                         s.__current=None
                   else:
+                        s.__notes.remove(s.__current)
+                        s.__current.destroy()
                         s.selectNote(s.__notes[ind-1])
             else:
-                  s.selectNote(s.__notes[ind+1])
-            s.__notes.remove(s.__current)
+                  s.__notes.remove(s.__current)
+                  s.__current.destroy()
+                  s.selectNote(s.__notes[ind])
+                  s.__updatePosition(ind)
             s.__n-=1
+            s.__Y-=40
+            
+      def __updatePosition(s,index):#Odswieza pozycje notatek po usunieciu jednej z nich
+            for i in s.__notes[index:]:
+                  i.moveUp()
       def getCurrentNote(s):#Zwraca biezaca notatke
             return s.__current
       def hasNotes(s):#Sprawdza czy liste notatek nie jest pusta
@@ -45,3 +70,5 @@ class NoteManager:
       def showAllNotes(s):#Wyswietla wszystkich potomkow
             for i in s.__notes:
                   i.show()
+      def getNotes(s):#Zwraca wszystkie notatki
+            return s.__notes

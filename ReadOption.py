@@ -1,3 +1,5 @@
+#-*- coding: utf-8 -*-
+#-*- encoding: utf-8 -*-
 from NoteFactory import NoteFactory
 from NoteGUI import NoteGUI
 import os
@@ -14,32 +16,33 @@ class ReadOption:
                   plik=open("./todo.txt","r")
                   dane=plik.readlines()
                   plik.close()
-                  #noteF=NoteFactory()
                   
-                  s.__noteF.newNoteWithText(s.__todo,None,dane[0].rstrip(),50,10)
+                  s.__noteF.newNoteWithText(s.__todo,None,dane[0].rstrip().strip(),50,10)
                   note=s.__noteF.getNote()
                   NoteGUI(s.__C,note)
                   todo=note
                   current=note
                   for i in dane[1:]:
-                        if i.rstrip()=="<children>":
+                        line=i.rstrip().strip()
+                        if line=="<children>":
                               s.__todo.setDominator(current)
-                        elif i.rstrip()=="</children>":
+                        elif line=="</children>":
                               master=s.__todo.getDominator().getMaster()
                               if master==None:
                                     pass
                               else:
                                     s.__todo.setDominator(master)
                         else:
-                              s.__noteF.newNoteWithText(s.__todo,s.__todo.getDominator(),i.rstrip(),50,10)
+                              s.__noteF.newNoteWithText(s.__todo,s.__todo.getDominator(),line,50,10)
                               note=s.__noteF.getNote()
                               current=note
                               NoteGUI(s.__C,note)
                               s.__todo.getDominator().addNote(note)
-                              
+                  s.__todo.setDominator(todo)
             else:
                   plik=open("./todo.txt","w")
                   plik.write("todo")
                   plik.flush()
                   plik.close()
-            s.__todo.setDominator(todo)
+                  s.read()
+            

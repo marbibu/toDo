@@ -1,11 +1,11 @@
+#-*-coding: utf-8 -*-
 from Window import Window
 from Desk import Desk
 from Talk import Talk
 from ToDo import ToDo
-from NoteFactory import NoteFactory
-from NoteGUI import NoteGUI
 from TopBar import TopBar
 from OptionBar import OptionBar
+#import unicodedata
 
 class Main:
       def __init__(s):
@@ -19,9 +19,8 @@ class Main:
             C=desk.getC()
             
             optionB=OptionBar(master,desk,todo)
-            talk=Talk(master,todo)
+            talk=Talk(master,todo,desk)
             #testowanie
-            
             
             #testowanie
             win.loop()

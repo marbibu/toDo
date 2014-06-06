@@ -7,8 +7,8 @@ class DelOption:
             s.__draw()
             s.__bind()
       def __draw(s):#Rysuje kontrolke
-            s.__tag=s.__C.create_text(550,15,text="DEL",anchor="e")
+            s.__tag=s.__C.create_text(550,15,text="DEL",anchor="e",activefill="gold")
       def __click(s,event):#Klikniecie
-            print "Kliknieto na del"
+            s.__todo.delNote()
       def __bind(s):#Tworzy bindowanie
             s.__C.tag_bind(s.__tag,"<1>",s.__click)

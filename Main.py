@@ -1,11 +1,9 @@
-#-*-coding: utf-8 -*-
 from Window import Window
 from Desk import Desk
 from Talk import Talk
 from ToDo import ToDo
 from TopBar import TopBar
 from OptionBar import OptionBar
-#import unicodedata
 
 class Main:
       def __init__(s):

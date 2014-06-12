@@ -38,21 +38,24 @@ class NoteManager:
                   else:
                         pass
       def delNote(s):#Usuwa biezaca notatke
-            ind=s.__notes.index(s.__current)
-            if ind==s.__n-1:
-                  if ind==0:
-                        s.__current=None
+            if s.__current==None:
+                  pass
+            else:
+                  ind=s.__notes.index(s.__current)
+                  if ind==s.__n-1:
+                        if ind==0:
+                              s.__current=None
+                        else:
+                              s.__notes.remove(s.__current)
+                              s.__current.destroy()
+                              s.selectNote(s.__notes[ind-1])
                   else:
                         s.__notes.remove(s.__current)
                         s.__current.destroy()
-                        s.selectNote(s.__notes[ind-1])
-            else:
-                  s.__notes.remove(s.__current)
-                  s.__current.destroy()
-                  s.selectNote(s.__notes[ind])
-                  s.__updatePosition(ind)
-            s.__n-=1
-            s.__Y-=40
+                        s.selectNote(s.__notes[ind])
+                        s.__updatePosition(ind)
+                  s.__n-=1
+                  s.__Y-=40
             
       def __updatePosition(s,index):#Odswieza pozycje notatek po usunieciu jednej z nich
             for i in s.__notes[index:]:
